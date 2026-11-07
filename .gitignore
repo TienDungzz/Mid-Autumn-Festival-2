@@ -1,0 +1,61 @@
+# Dependencies and package-manager caches
+node_modules/
+.npm/
+.pnpm-store/
+.yarn/cache/
+.yarn/unplugged/
+.yarn/install-state.gz
+.pnp.*
+
+# Web build output and tooling caches
+/dist/
+/build/
+/out/
+/.vite/
+/.cache/
+/.turbo/
+*.tsbuildinfo
+.eslintcache
+.stylelintcache
+
+# Test reports and local visual QA
+/coverage/
+/playwright-report/
+/test-results/
+/.qa/
+
+# Local environment and secrets; keep example files
+.env
+.env.*
+!.env.example
+!.env.*.example
+*.local
+
+# Logs and temporary files
+*.log
+*.tmp
+*.temp
+*.swp
+*.swo
+~$*
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.pytest_cache/
+.ruff_cache/
+
+# Blender automatic backups (keep .blend sources and runtime assets)
+*.blend[0-9]*
+*.blend@
+
+# Local editor and operating-system files
+/.idea/
+/.vscode/*
+!/.vscode/extensions.json
+!/.vscode/settings.json
+!/.vscode/tasks.json
+!/.vscode/launch.json
+.DS_Store
+Thumbs.db
+Desktop.ini
