@@ -2,6 +2,8 @@
 
 ## Phạm vi hiện hành
 
+- [Định hướng hình ảnh phố cổ và mức chi tiết](art-direction.md)
+
 Hai cảnh: đôi nhân vật thả lồng đèn trên cầu giữa phố cổ Trung Hoa bên sông → camera thu nhỏ cảnh đầu và hướng lên trời nhiều đèn → nhấn đèn nhận lời chúc ngẫu nhiên.
 
 - [Yêu cầu sản phẩm](product-requirements.md)
@@ -19,8 +21,13 @@ Hai cảnh: đôi nhân vật thả lồng đèn trên cầu giữa phố cổ T
 - [Kế hoạch triển khai](implementation-plan.md)
 - [Chiến lược kiểm thử](testing-strategy.md)
 
-## Tài liệu kế thừa
+## Vận hành và nội dung
 
-[Frame authoring](frame-authoring-guide.md), [localization](localization.md), [theme](theme.md) và [deployment](deployment-guide.md) còn là tài liệu từ photobooth, chưa áp dụng cho phạm vi mới. Khi triển khai cần viết lại phần liên quan theo stack đã chọn. Các lệnh checker/deploy cũ không được xem là đã tồn tại.
+- [Đa ngôn ngữ VI/EN](localization.md)
+- [Build và deploy](deployment-guide.md)
 
-Nguồn trong art/characters/ là tài nguyên tham khảo; các hướng dẫn tặng/nhận hoa và đường dẫn runtime cũ cần kiểm chứng trước khi tái sử dụng cho thả đèn.
+Nguồn trong art/characters/ là đầu vào script tạo hai nhân vật Trung thu. Bản Blender trung gian nằm trong .qa/characters và không thuộc nguồn cần commit. Đã bỏ tài liệu frame/theme photobooth không còn áp dụng.
+
+Home đã chọn layout **Hai cánh mở**; bố cục, responsive và tương tác xem tại [UI/UX](ui-ux-spec.md).
+
+- [Kết quả kiểm tra bản dựng hiện tại](verification-report.md)

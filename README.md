@@ -11,7 +11,7 @@ Mỗi lượt chọn đèn lấy ngẫu nhiên lại; lời chúc có thể trù
 
 ## Trạng thái dự án
 
-Dự án hiện có tài liệu thiết kế và tài nguyên nghệ thuật. Chưa có ứng dụng web, cấu hình build hoặc lệnh chạy được xác nhận; stack sẽ được chốt khi triển khai.
+Dự án đã có bản web local dùng TypeScript, Vite và Three.js, cùng mô hình nhân vật được chuyển đổi từ nguồn Blender có sẵn. Xem [kết quả kiểm tra và giới hạn hiện tại](docs/verification-report.md).
 
 Blender MCP có thể được sử dụng để dựng mô hình, chỉnh vật liệu và tạo animation. Website sẽ sử dụng các tài nguyên đã xuất, không cần kết nối Blender khi chạy.
 
@@ -22,10 +22,15 @@ Mid-Autumn-Festival-2/
 ├── README.md       # Giới thiệu dự án
 ├── .gitignore
 ├── docs/           # Yêu cầu, thiết kế và tiêu chuẩn triển khai
-└── art/            # Tài nguyên nghệ thuật và nguồn Blender
+├── art/            # Nguồn Blender và hình ảnh
+├── src/            # UI, state, domain và engine
+├── public/         # GLB và branding runtime
+├── scripts/        # Công cụ Blender
+├── tests/          # Unit tests
+└── package.json    # Lệnh dev/build/typecheck/test
 ```
 
-Cấu trúc ứng dụng dự kiến được mô tả trong [cấu trúc thư mục](docs/folder-structure.md).
+Cấu trúc hiện hành và định hướng tách module được mô tả trong [cấu trúc thư mục](docs/folder-structure.md).
 
 ## Tài liệu
 
@@ -40,4 +45,22 @@ Cấu trúc ứng dụng dự kiến được mô tả trong [cấu trúc thư m
 - [Kế hoạch triển khai](docs/implementation-plan.md)
 - [Chiến lược kiểm thử](docs/testing-strategy.md)
 
-Các tài liệu photobooth cũ chưa chuyển đổi được đánh dấu riêng trong mục lục docs; không dùng chúng làm phạm vi cho trải nghiệm Trung thu hiện hành.
+Các hướng dẫn ngôn ngữ và build/deploy đã cập nhật cho Trung thu; tài liệu frame/theme photobooth không còn áp dụng đã được bỏ.
+
+## Layout home
+
+Home sử dụng layout **Hai cánh mở**: tiêu đề và nút “Bước vào đêm trăng” nằm giữa hai cánh cửa cổ. Khi cảnh 1 đã sẵn sàng, nhấn nút để mở cửa, rồi chọn “Thả lồng đèn” để bắt đầu câu chuyện. Xem [đặc tả UI/UX](docs/ui-ux-spec.md).
+
+## Chạy và kiểm tra
+
+Khuyến nghị Node.js 22.13 trở lên trong nhánh 22, hoặc Node.js 24 trở lên để tương thích ESLint 10. Trong PowerShell có thể dùng npm.cmd để tránh lỗi execution policy của npm.ps1.
+
+```sh
+npm.cmd install
+npm.cmd run dev
+npm.cmd run build
+npm.cmd test
+npm.cmd run check
+```
+
+Mở URL Local mà Vite in ra. Thư mục dist chứa bản build; public/models/characters chứa GLB runtime, art/characters giữ nguồn Blender. Hiện dự án chưa được đưa lên hosting.
