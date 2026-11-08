@@ -1,0 +1,35 @@
+{
+  "name": "mid-autumn-festival",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite --host 127.0.0.1 --port 5177 --strictPort",
+    "build": "tsc --noEmit && vite build",
+    "typecheck": "tsc --noEmit",
+    "test": "node --experimental-strip-types --test tests/*.test.ts",
+    "preview": "vite preview --host 127.0.0.1",
+    "lint": "eslint src tests *.js --max-warnings 0",
+    "lint:fix": "npm run lint -- --fix",
+    "lint:css": "stylelint \"src/**/*.css\" --max-warnings 0",
+    "lint:css:fix": "npm run lint:css -- --fix",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "check": "npm run typecheck && npm run lint && npm run lint:css && npm run format:check && npm test && npm run build"
+  },
+  "dependencies": {
+    "three": "^0.180.0"
+  },
+  "devDependencies": {
+    "@eslint/js": "^10.0.1",
+    "@types/three": "^0.180.0",
+    "eslint": "^10.14.0",
+    "globals": "^16.5.0",
+    "prettier": "^3.9.10",
+    "stylelint": "^16.26.1",
+    "stylelint-config-standard": "^38.0.0",
+    "typescript": "^5.9.3",
+    "typescript-eslint": "^8.72.1",
+    "vite": "^7.1.0"
+  }
+}

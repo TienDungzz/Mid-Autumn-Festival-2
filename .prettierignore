@@ -1,0 +1,6 @@
+node_modules/
+dist/
+.qa/
+art/
+public/
+package-lock.json
