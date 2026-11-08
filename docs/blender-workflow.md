@@ -4,7 +4,7 @@
 
 Dự án có thể dùng kết nối Blender MCP để kiểm tra scene, chạy Python bpy, dựng/chỉnh mô hình, tạo vật liệu, rig/animation và xuất GLB. MCP là công cụ trong quá trình sản xuất tài nguyên, không phải dependency của website khi chạy trên máy người xem.
 
-Trong phiên làm việc đã có công cụ Blender MCP khả dụng. Điều đó không đồng nghĩa Blender đang mở hoặc kết nối đang hoạt động; kiểm tra trước mỗi phiên dựng. Tài liệu này không xác nhận đã dựng hoặc xuất mô hình mới.
+Repository đã có script scripts/blender/prepare_characters.py và hai GLB nhân vật runtime. Script đọc art/characters/mid-autumn-male-source.blend và mid-autumn-female-source.blend; ghi GLB trực tiếp vào public/models/characters và Blender trung gian vào .qa/characters. Chưa chạy lại script sau khi đổi tên nguồn/đường dẫn staging. Khả năng kết nối MCP phải kiểm tra ở mỗi phiên; không suy ra trạng thái live Blender từ tài liệu.
 
 ## 2. Bắt đầu phiên dựng
 
@@ -16,15 +16,17 @@ Trong phiên làm việc đã có công cụ Blender MCP khả dụng. Điều �
 
 Không tự dựng mô hình chỉ vì cập nhật tài liệu. Khi được giao tác vụ dựng, tiếp tục trong phạm vi asset đã yêu cầu.
 
-## 3. Phân chia mô hình và đặt tên
+## 3. Phân chia mô hình và đặt tên mục tiêu
 
-| Collection nguồn | Nội dung | Đích xuất |
-| --- | --- | --- |
-| ENV_RiverTown | Cầu, bờ sông, module phố cổ Trung Hoa | public/models/environment/ |
-| CHAR_Male, CHAR_Female | Nhân vật và rig tương ứng | public/models/characters/ |
-| PROP_SkyLantern | Đèn trời với điểm cầm và tâm bay | public/models/props/ |
-| PROP_StreetDecor | Đèn treo, biển tiệm, đạo cụ phố | public/models/props/ |
-| REF_Cameras | Camera/blockout tham khảo | Chỉ xuất khi runtime cần |
+Bảng dưới là quy ước cho asset dựng mới, không phải collection/file đã có. Phố, cầu, thuyền và đèn hiện được dựng bằng Three.js trong src/engine; chỉ hai nhân vật tải từ GLB. Script nhân vật hiện dùng collection INSPECT_Male/INSPECT_Female và clip Lantern_Release_male/female. Loader chọn clip có tên chứa Lantern_Release, fallback clip đầu tiên.
+
+| Collection nguồn       | Nội dung                              | Đích xuất                  |
+| ---------------------- | ------------------------------------- | -------------------------- |
+| ENV_RiverTown          | Cầu, bờ sông, module phố cổ Trung Hoa | public/models/environment/ |
+| CHAR_Male, CHAR_Female | Nhân vật và rig tương ứng             | public/models/characters/  |
+| PROP_SkyLantern        | Đèn trời với điểm cầm và tâm bay      | public/models/props/       |
+| PROP_StreetDecor       | Đèn treo, biển tiệm, đạo cụ phố       | public/models/props/       |
+| REF_Cameras            | Camera/blockout tham khảo             | Chỉ xuất khi runtime cần   |
 
 Tên object duy nhất, có ý nghĩa như bridge_main, lantern_body, lantern_grip. Cố định hợp đồng node/clip trước khi code runtime tham chiếu tên. Dùng module kiến trúc tái sử dụng thay vì xuất nguyên dãy phố trùng mesh.
 
@@ -44,7 +46,9 @@ Tên object duy nhất, có ý nghĩa như bridge_main, lantern_body, lantern_gr
 
 generate_3d là lựa chọn bổ sung cho từng mô hình, không dùng một yêu cầu để tạo cả cảnh. Dịch vụ có thể tốn credit; chỉ dùng khi phạm vi tác vụ cho phép sử dụng dịch vụ đó. Kiểm scale, topology, UV, rig và quyền sử dụng của đầu ra, không đưa thẳng lên web mà chưa QA.
 
-## 6. Xuất và kiểm chứng
+## 6. Quy trình xuất và kiểm chứng mục tiêu
+
+Các bước staging/manifest dưới đây là chuẩn mục tiêu. Script hiện xuất thẳng GLB vào public, chưa tự động chặn thay thế bằng cổng QA; assets manifest chưa tồn tại.
 
 1. Lưu .blend và texture nguồn trong art theo nhóm. Script bpy tái sử dụng nằm trong scripts/blender.
 2. Chọn đúng collection/object và animation cần xuất; không kèm camera, đèn hoặc đối tượng ẩn ngoài hợp đồng.
