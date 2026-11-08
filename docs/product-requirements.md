@@ -42,3 +42,11 @@ Các chi tiết sau là mặc định để triển khai, có thể tinh chỉnh
 5. Đóng, nhấn lại, xem lại, bàn phím và giảm chuyển động hoạt động theo [kiểm thử](testing-strategy.md).
 
 Chi tiết tại [bối cảnh và storyboard](scene-design.md), [luồng trải nghiệm](user-flows.md), [UI/UX](ui-ux-spec.md).
+
+## 6. Home — Hai cánh mở
+
+Layout home đã chọn là hai cánh cửa cổ khép, tiêu đề/lời dẫn và CTA “Bước vào đêm trăng” căn giữa. Logo nhỏ góc trên trái; VI/EN, âm thanh và quay lại ở góc trên phải. Giảm chuyển động tự theo thiết bị, không có nút riêng. Không dùng bố cục chữ trái và mô hình phải.
+
+Tải cảnh 1 phía sau home; chỉ bật CTA khi tài nguyên bắt buộc sẵn sàng. Nhấn CTA mở hai cánh sang hai bên để hé lộ cảnh 1, sau đó mới cho nhấn “Thả lồng đèn”. Home là lớp giới thiệu, không thay đổi nội dung hai cảnh chính.
+
+Nghiệm thu bổ sung: không mở vào cảnh rỗng, không chạy trùng khi nhấn nhanh, không lộ điều khiển cảnh dưới cửa đóng; bàn phím/mobile/giảm chuyển động tiếp cận được cảnh 1. “Xem lại” vẫn trở về cảnh 1; reload trở về home. Chi tiết tại [UI/UX](ui-ux-spec.md#5-layout-home-đã-chọn--hai-cánh-mở).

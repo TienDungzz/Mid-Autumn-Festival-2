@@ -1,17 +1,21 @@
 # Bối cảnh và storyboard Trung thu
 
+Định hướng phố cổ theo hai ảnh tham chiếu mới, cách chia lớp gần/trung/xa và giới hạn chi tiết nằm tại [art direction](art-direction.md). Ưu tiên mái cong, kiến trúc nhiều lớp và ánh đèn ấm trên nền đêm xanh sâu.
+
+Tư thế hiện hành của cảnh thả đèn: hai nhân vật đứng đối diện ở hai phía chiếc đèn, mỗi người dùng cả hai tay đỡ viền dưới. Cùng nâng theo một nhịp, giữ ngắn rồi đồng thời buông; sau đó hạ tay nhẹ về trước thân. Thay thế tư thế cùng quay mặt ra camera hoặc chỉ dùng một tay trước đây.
+
 ## 1. Định hướng hình ảnh
 
 Đêm Trung thu tại phố cổ phong cách Trung Hoa. Dòng sông ở giữa, hai bờ phố nhộn nhịp nối bằng một cây cầu. Ánh đèn vàng cam, điểm đỏ lễ hội và trời xanh đêm tạo chiều sâu. Trăng là chi tiết nền gợi Trung thu, không lấn át nhân vật và lồng đèn.
 
 ## 2. Cảnh 1 — Cùng thả một ước nguyện
 
-| Lớp cảnh | Nội dung |
-| --- | --- |
-| Chủ thể | Chàng trai và cô gái đứng cạnh nhau trên cầu, cùng giữ một lồng đèn trời |
-| Trung cảnh | Cầu bắc qua sông giữa khung cảnh, mặt nước phản chiếu ánh đèn |
-| Hai bờ | Phố cổ Trung Hoa, mái ngói, cửa tiệm, đèn treo, người qua lại tấp nập |
-| Hậu cảnh | Phố xa mờ dần, bầu trời đêm và một số đèn bay xa |
+| Lớp cảnh   | Nội dung                                                                 |
+| ---------- | ------------------------------------------------------------------------ |
+| Chủ thể    | Chàng trai và cô gái đứng cạnh nhau trên cầu, cùng giữ một lồng đèn trời |
+| Trung cảnh | Cầu bắc qua sông giữa khung cảnh, mặt nước phản chiếu ánh đèn            |
+| Hai bờ     | Phố cổ Trung Hoa, mái ngói, cửa tiệm, đèn treo, người qua lại tấp nập    |
+| Hậu cảnh   | Phố xa mờ dần, bầu trời đêm và một số đèn bay xa                         |
 
 Nhịp hoạt cảnh: giới thiệu không gian → hai người cùng nâng đèn → buông tay → đèn bay lên. Tay phải bám đúng đèn, tránh xuyên vật thể hoặc đèn rời tay quá sớm. Hoạt động hai bờ tạo sức sống nhưng đôi nhân vật trên cầu vẫn là điểm nhìn chính.
 
@@ -52,3 +56,17 @@ Nhấn một đèn chọn ngẫu nhiên một lời chúc từ danh sách chung.
 - Đạo cụ đèn tách khỏi rig để điều khiển lúc giữ và lúc bay. Bó hoa và động tác nhận hoa của tài nguyên cũ không thuộc storyboard này.
 
 Đây là yêu cầu dựng cảnh, không xác nhận asset hoặc animation cần thiết đã có sẵn.
+
+## 7. Mở đầu website
+
+Trước cảnh 1 là home “Hai cánh mở”: hai cánh cửa cổ khép và nội dung căn giữa. CTA mở hai cánh ngang, để lộ cảnh 1; sau đó người dùng nhấn “Thả lồng đèn”. Đây là lớp giao diện mở đầu, không bổ sung cảnh thứ ba. Bố cục/hiệu ứng được quy định tại [UI/UX](ui-ux-spec.md).
+
+## 8. Mở rộng phố hội và bầu trời
+
+Đường dạo hai bờ và khoảng sân tiếp nối hai đầu cầu rộng hơn, có lát nền, chậu cây, ghế và hàng quán. Nhà tầng treo đèn lồng ở ban công, dây đèn và dải LED vàng ấm dưới mái. Giữ ánh sáng cùng bảng màu lễ hội, không nhấp nháy mạnh.
+
+Thuyền có mái che và đèn di chuyển dọc sông theo hai chiều, có lắc nhẹ và vệt nước. Kích thước/tuyến đi phải đủ khoảng trống dưới cầu, không xuyên thành cầu hoặc chạy lên bờ.
+
+Đèn trời nhỏ là lớp nền có quầng sáng, nhất là đèn xa. Đèn lớn mang lời chúc bay lên liên tục, có độ lệch nhẹ và khoảng cách gần/xa khác nhau; không xếp thành lưới cố định hoặc gắn vị trí vào camera. Đèn ra khỏi vùng trời sẽ được tái sử dụng từ phía dưới.
+
+Bầu trời chỉ giữ sao nền; đã bỏ hình sao Hằng Nga và chú Cuội. Trăng có mảng tối/miệng hố nhẹ, nằm trọn khung nhìn mobile và tránh tiêu đề desktop. Đèn ông sao năm cánh nhiều màu xuất hiện ở home và cạnh dòng gợi ý trong cảnh, không phải đèn nhận lời chúc.
