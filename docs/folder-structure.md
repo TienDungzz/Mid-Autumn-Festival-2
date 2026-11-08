@@ -1,93 +1,47 @@
-# Cấu trúc thư mục — Trung thu
+# Cấu trúc thư mục hiện hành
 
-## 1. Trạng thái và cây mục tiêu
+Cập nhật 09/11/2026. Stack: TypeScript strict, Vite, Three.js, UI DOM/CSS. Dự án không dùng React hoặc backend.
 
-Workspace hiện có docs/ và art/. Cây sau là định hướng khi khởi tạo ứng dụng, không xác nhận các file/runtime/script đã tồn tại. Chỉ tạo thư mục khi có nội dung thực.
+```text
+README.md                         # Giới thiệu và cách chạy
+package.json / package-lock.json   # Lệnh và dependency
+index.html / tsconfig.json         # Entry HTML và cấu hình TypeScript
+eslint.config.js                  # Lint TS/JS
+stylelint.config.js               # Lint CSS
+.prettierrc.json / .prettierignore # Formatter và phạm vi bỏ qua
+.editorconfig / .gitignore        # Quy ước editor và file không commit
+docs/                             # Đặc tả, tiêu chuẩn, báo cáo
+src/
+  main.ts                         # DOM, sự kiện, locale, focus và điều phối
+  app/story-state.ts              # State machine
+  content/                        # wishes.ts, translations.ts
+  domain/wishes/pick-wish.ts       # Random thuần
+  engine/                         # Cảnh Three.js, nhân vật/IK, đèn, thuyền, trăng, âm thanh
+  shared/styles/main.css          # CSS và token dùng chung
+tests/                            # Sáu file unit test, 10 test case
+scripts/blender/prepare_characters.py
+art/
+  characters/                     # mid-autumn-{male,female}-source.blend, textures, README
+  branding/                       # Logo master và ghi chú nguồn
+public/
+  models/characters/              # festival-male.glb, festival-female.glb
+  branding/                       # Logo, favicon PNG, star-lantern.svg
+  favicon.ico
+```
 
-Ví dụ dùng TypeScript/TSX nếu chọn React; ranh giới module vẫn áp dụng khi dùng UI framework khác.
+## File được tạo lại
 
-~~~text
-Mid-Autumn-Festival-2/
-├── docs/
-│   ├── README.md
-│   ├── scene-design.md
-│   ├── coding-standards.md
-│   ├── folder-structure.md
-│   └── blender-workflow.md
-├── art/                         # Nguồn biên tập, không phục vụ trực tiếp lên web
-│   ├── characters/              # Giữ các master hiện có
-│   ├── environment/             # Cầu, bờ sông, module phố cổ
-│   ├── props/                   # Lồng đèn, đèn treo, đạo cụ
-│   ├── scenes/                  # Bố cục tổng thể và camera tham khảo
-│   └── references/              # Tham chiếu và thông tin quyền sử dụng
-├── scripts/
-│   ├── blender/                 # Python: build, validate, export
-│   └── assets/                  # Kiểm tra GLB/texture/manifest, tối ưu sau export
-├── public/
-│   ├── models/
-│   │   ├── characters/
-│   │   ├── environment/
-│   │   └── props/
-│   ├── textures/
-│   └── assets-manifest.json
-├── src/
-│   ├── main.tsx
-│   ├── app/
-│   │   ├── App.tsx
-│   │   └── model/               # Story state machine, phối hợp UI và engine
-│   ├── content/
-│   │   ├── wishes.vi.ts
-│   │   └── ui.vi.ts
-│   ├── domain/
-│   │   ├── story/               # State/event và quy tắc chuyển cảnh thuần
-│   │   └── wishes/              # Type, validation, pick-wish.ts
-│   ├── features/
-│   │   ├── story-controls/
-│   │   ├── lantern-selection/   # Liên kết sự kiện chọn đèn với UI truy cập
-│   │   └── wish-dialog/
-│   ├── engine/
-│   │   ├── runtime/             # Render loop, resize, pause/resume, dispose
-│   │   ├── assets/              # Loader, cache và quyền sở hữu tài nguyên
-│   │   ├── scenes/              # Lắp cảnh cầu/phố và trạng thái bầu trời
-│   │   ├── characters/          # Rig, mixer, pose và hiệu chỉnh tay
-│   │   ├── lanterns/            # Spawn, bay, pooling, vùng chọn
-│   │   ├── camera/              # Camera và timeline chuyển cảnh
-│   │   └── effects/             # Nước, ánh sáng và hiệu ứng
-│   └── shared/
-│       ├── ui/                  # Nút, loading, dialog cơ bản
-│       ├── lib/
-│       ├── config/
-│       └── styles/              # Tokens, reset, global, utilities
-├── tests/
-│   ├── integration/
-│   ├── e2e/
-│   └── fixtures/
-└── .qa/                         # Preview, render QA, GLB staging; không deploy
-~~~
+- node_modules: tạo bằng npm.cmd ci; không commit.
+- dist: tạo bằng npm.cmd run build; chỉ nội dung này là artifact deploy.
+- .qa/characters/festival-*.blend: đầu ra trung gian của script Blender; không commit. Có thể chưa tồn tại sau khi dọn.
+- .cache: cache công cụ, không phải tài nguyên web.
 
-## 2. Chiều phụ thuộc
+Hai file Blender nguồn là đầu vào script, không phải bản xuất thừa. Web chỉ tải GLB và branding trong public; không tải art hoặc scripts. Không có module constellations.ts hoặc hình sao Hằng Nga/chú Cuội.
 
-| Tầng | Được phụ thuộc | Trách nhiệm |
-| --- | --- | --- |
-| app | features, engine, domain, content, shared | Điều phối toàn trải nghiệm |
-| features | domain, shared | UI/hành vi sản phẩm; nhận adapter engine từ app |
-| engine | domain, shared/lib, shared/config, thư viện đồ họa | Render và tài nguyên 3D, không import UI |
-| content | Type từ domain | Lời chúc và nhãn tĩnh |
-| domain | Module thuần trong domain | Không biết DOM, React, Blender hoặc WebGL |
-| shared | shared và thư viện ngoài | Thành phần chung, không import tầng trên |
+## Chiều phụ thuộc
 
-Không tầng nào import app. Các feature phối hợp qua app thay vì gọi store của nhau. Module công bố index.ts tối thiểu, không deep import hoặc phụ thuộc vòng.
+main.ts điều phối app, content, domain và engine. Engine không import UI/app; domain không phụ thuộc DOM hoặc Three.js. Các module engine trao đổi nội bộ qua named export. CSS hiện tập trung trong main.css.
 
-## 3. Ranh giới cảnh và tài nguyên
+## Cấu trúc chưa triển khai
 
-Hai cảnh là hai giai đoạn của cùng không gian. Có thể dùng chung scene graph để giữ liên tục camera/đèn; không bắt buộc tải hai bản cầu/phố trùng nhau.
-
-art chứa .blend và texture nguồn. public chỉ chứa tài nguyên đã xuất/tối ưu và được kiểm chứng trong runtime. .qa giữ bản xuất thử và ảnh so sánh; scripts không tự ghi đè master từ staging.
-
-Manifest ghi ID, URL phiên bản, nguồn .blend, clip/node cần dùng, kích thước file và thông tin quyền sử dụng. Đường dẫn trong manifest tương đối dự án; không lưu đường dẫn máy cá nhân. Bản sao dự phòng và cache không thuộc artifact phát hành.
-
-## 4. Test và thay đổi cấu trúc
-
-Unit test cạnh module như pick-wish.test.ts. Integration kiểm tra phối hợp state/UI/engine; e2e kiểm tra hành trình hai cảnh. Không tạo module rỗng hoặc giữ tên frame-catalog, photo-library, capture-session từ photobooth.
-
-Nguồn nhân vật hiện có được giữ tại art/characters; các đường dẫn scripts/public trong README cũ chỉ có giá trị sau kiểm chứng. Quy trình nguồn → staging → runtime tại [Blender MCP](blender-workflow.md).
+Chưa tách features/home-entry, wish-dialog, story-controls hoặc CSS cạnh feature; chưa có assets-manifest.json, integration/e2e hoặc CI. Đây là việc cải tiến có thể thực hiện sau, không phải đường dẫn dùng được trong repository hiện tại. Xem coding-standards.md và verification-report.md.
