@@ -2,19 +2,19 @@
 
 ## 1. Trạng thái
 
-Workspace chưa có ứng dụng hoặc package.json/checker được xác nhận. Các bước dưới đây là yêu cầu khi triển khai, không phải lệnh đã chạy. Theo [quy chuẩn code](coding-standards.md) và [kiểm thử](testing-strategy.md).
+Workspace đã có ứng dụng TypeScript/Vite/Three.js và bộ kiểm tra ESLint, Stylelint, Prettier. Chạy npm.cmd run check để kiểm type, lint TS/JS, lint CSS, định dạng, test và build. Chưa có CI; các cổng dưới đây vẫn là yêu cầu nghiệm thu, không phải tuyên bố đã đạt đầy đủ. Kết quả tại [báo cáo kiểm tra](verification-report.md), theo [quy chuẩn code](coding-standards.md) và [kiểm thử](testing-strategy.md).
 
 ## 2. Cổng kiểm tra
 
-| Phạm vi thay đổi | Kiểm tra phù hợp |
-| --- | --- |
-| Docs | UTF-8, liên kết nội bộ, nhất quán yêu cầu và trạng thái triển khai |
-| Logic lời chúc | Chỉ số random biên, rỗng/một phần tử, mỗi lượt một lần, không random trong render |
-| Điều phối cảnh | Chặn chạy trùng, chuyển trạng thái, reset, callback đến muộn, ẩn/hiện tab |
-| UI | Responsive, chạm/bàn phím, focus, hộp thoại, giảm chuyển động |
-| Asset Blender | Nguồn/giấy phép, scale/pivot, node/clip, vật liệu/rig, preview và kiểm loader web |
-| Engine | Cleanup, dùng chung tài nguyên, vòng lặp render, số đèn ổn định sau reset |
-| Phát hành | Build/typecheck/lint, hành trình hai cảnh, tải lỗi, đo mobile, artifact/cache |
+| Phạm vi thay đổi | Kiểm tra phù hợp                                                                  |
+| ---------------- | --------------------------------------------------------------------------------- |
+| Docs             | UTF-8, liên kết nội bộ, nhất quán yêu cầu và trạng thái triển khai                |
+| Logic lời chúc   | Chỉ số random biên, rỗng/một phần tử, mỗi lượt một lần, không random trong render |
+| Điều phối cảnh   | Chặn chạy trùng, chuyển trạng thái, reset, callback đến muộn, ẩn/hiện tab         |
+| UI               | Responsive, chạm/bàn phím, focus, hộp thoại, giảm chuyển động                     |
+| Asset Blender    | Nguồn/giấy phép, scale/pivot, node/clip, vật liệu/rig, preview và kiểm loader web |
+| Engine           | Cleanup, dùng chung tài nguyên, vòng lặp render, số đèn ổn định sau reset         |
+| Phát hành        | Build/typecheck/lint, hành trình hai cảnh, tải lỗi, đo mobile, artifact/cache     |
 
 ## 3. Công cụ dự kiến
 

@@ -2,7 +2,7 @@
 
 ## 1. Phạm vi và định dạng
 
-Áp dụng cho trải nghiệm hai cảnh tại [yêu cầu sản phẩm](product-requirements.md), theo [cấu trúc thư mục](folder-structure.md). TypeScript là định hướng cho web; React và thư viện 3D chỉ là lựa chọn đề xuất cho đến khi có quyết định triển khai.
+Áp dụng cho trải nghiệm hai cảnh tại [yêu cầu sản phẩm](product-requirements.md), theo [cấu trúc thư mục](folder-structure.md). Stack hiện hành là TypeScript strict, Vite và Three.js với UI DOM/CSS, không dùng React. Những quy tắc dưới đây là chuẩn mục tiêu; các sai lệch hiện tại được ghi trong verification-report.md.
 
 - Văn bản UTF-8, LF, newline cuối file; TypeScript/CSS thụt 2 spaces, Python Blender 4 spaces.
 - TypeScript strict; const mặc định, không dùng any để bỏ kiểm tra. Dữ liệu ngoài module bắt đầu bằng unknown rồi validate.
@@ -13,7 +13,7 @@
 
 ## 2. Trạng thái và logic
 
-- Dùng union/state machine cho loading, scene1Ready, releasing, transitioning, scene2Ready và loadError. Không ghép boolean tạo trạng thái mâu thuẫn.
+- Dùng union/state machine cho homeLoading, homeReady, openingDoors, scene1Ready, releasing, transitioning, scene2Ready và homeError. Không ghép boolean tạo trạng thái mâu thuẫn.
 - App sở hữu tiến trình hai cảnh. Logic lời chúc thuần không phụ thuộc UI hoặc engine 3D.
 - Chỉ gọi random trong sự kiện chọn đèn hợp lệ, đúng một lần; lưu kết quả để render ổn định. Cho phép trùng giữa các lượt.
 - Cấu hình camera, thời lượng, mật độ đèn và mốc buông tay có tên rõ, không rải số trực tiếp qua nhiều module.
@@ -35,16 +35,16 @@
 
 Dùng CSS thông thường theo BEM, trừ khi có quyết định thay đổi:
 
-| Loại | Ví dụ |
-| --- | --- |
-| Block | story-controls, wish-dialog |
-| Element | wish-dialog__message |
-| Modifier | wish-dialog--open |
+| Loại                   | Ví dụ                         |
+| ---------------------- | ----------------------------- |
+| Block                  | story-controls, wish-dialog   |
+| Element                | wish-dialog__message          |
+| Modifier               | wish-dialog--open             |
 | Class gốc kèm modifier | wish-dialog wish-dialog--open |
 
 Không nối element theo cây DOM; không dùng selector ID, selector sâu hoặc !important để chữa xung đột. Modifier không thay thế disabled/ARIA. Style component đặt cạnh component; token màu, spacing, typography, z-index dùng chung tại shared/styles.
 
-Nhãn giao diện tập trung trong content/ui.vi.ts; lời chúc trong content/wishes.vi.ts. Chưa bắt buộc i18n hoặc light/dark từ tài liệu photobooth cũ. Phong cảnh luôn là đêm Trung thu, không đảo màu cảnh 3D theo theme.
+Lời chúc hiện nằm trong content/wishes.ts; bản dịch VI/EN trong content/translations.ts. Nhãn gốc còn trong main.ts; tập trung hoàn toàn nội dung UI là việc còn lại. Phong cảnh luôn là đêm Trung thu, không đảo màu cảnh 3D theo theme.
 
 Mobile-first, nút có nhãn, vùng nhấn tối thiểu 44 × 44 CSS px, focus rõ và hộp thoại truy cập được. Hỗ trợ prefers-reduced-motion cả CSS lẫn timeline 3D.
 
@@ -60,6 +60,8 @@ Mobile-first, nút có nhãn, vùng nhấn tối thiểu 44 × 44 CSS px, focus 
 
 Theo chiều phụ thuộc tại folder-structure; không phụ thuộc vòng hoặc deep import nội bộ module khác. API công khai nhỏ, named export và import type khi phù hợp. Chỉ chuyển code lên shared khi thật sự dùng chung và không phụ thuộc nghiệp vụ.
 
-Khi khởi tạo app, cung cấp build, typecheck, lint, lint:css, format:check và test phù hợp toolchain. Đây là lệnh dự kiến, chưa xác nhận tồn tại.
+Đã có build, typecheck, lint (ESLint), lint:css (Stylelint), format:check (Prettier) và test. Chạy npm.cmd run check để thực hiện toàn bộ. Các lệnh lint:fix, lint:css:fix và format dùng để sửa tự động; kiểm tra diff sau khi chạy. Cấu hình .editorconfig thống nhất UTF-8, LF và thụt dòng. Python Blender chưa được bộ lint/formatter này kiểm tra.
+
+Stylelint kế thừa config-standard và kiểm tra tên class BEM. Selector ID hiện hữu được giữ như khoản nợ kỹ thuật, chưa áp cổng selector-max-id; không coi lint qua là đã hoàn tất việc chuyển sang class. Các override !important cho hidden/reduced motion vẫn cần theo dõi trong báo cáo. Chưa có CI tự động chạy các lệnh này.
 
 Thay đổi hoàn thành khi đúng hành vi, kiểm tra phù hợp đã chạy, UI được xem ở kích thước liên quan và asset 3D được kiểm tra trong runtime. Test tập trung vào random, state transition, reset/cleanup và mốc animation; không viết test chỉ sao chép chi tiết triển khai. Xem [quality checks](quality-checks.md).
