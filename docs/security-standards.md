@@ -6,6 +6,8 @@ Trải nghiệm dùng tài nguyên và lời chúc có sẵn; không cần tài 
 
 ## 2. Nội dung và nguồn ngoài
 
+Đây là tiêu chuẩn phải đáp ứng khi thêm tài nguyên/phát hành. Hiện URL GLB cố định trong engine, không có manifest hoặc upload người dùng; chưa có hồ sơ license đầy đủ. Nội dung lời chúc đã dùng textContent, còn template HTML là mã tĩnh trong main.ts.
+
 - Render lời chúc dưới dạng text; không chèn HTML hoặc thực thi mã từ nội dung/metadata.
 - Validate manifest, ID, URL, kiểu dữ liệu và giới hạn kích thước phù hợp loader. Chỉ tải từ nguồn dự án hoặc nguồn đã cấu hình rõ.
 - Asset tải ngoài cần nguồn, tác giả, giấy phép và attribution nếu yêu cầu. Kiểm trước khi phát hành cả asset thư viện lẫn đầu ra dịch vụ tạo 3D.
@@ -18,6 +20,8 @@ Trước sửa scene, kiểm file đang mở và giới hạn collection/tệp t
 Không đưa secret/token, đường dẫn cá nhân hoặc cấu hình MCP vào .blend đóng gói, manifest, log hoặc public. Dịch vụ tạo model ngoài có thể gửi prompt/ảnh đến nhà cung cấp; chỉ dùng trong phạm vi được giao.
 
 ## 4. Web và phát hành
+
+Hiện có package-lock.json; chưa cấu hình hosting, CSP/header production hoặc CI. npm audit gần nhất ngày 09/11 ghi 10 moderate trong dependency dev; chưa phải bằng chứng đã xử lý an toàn dependency. Kết quả chi tiết tại verification-report.md.
 
 Dùng HTTPS, header/CSP phù hợp host và loader thực tế; nếu dùng decoder/worker/WASM, khai báo đúng nhu cầu thay vì mở quyền rộng. Không ghi nhận nội dung cá nhân không cần thiết. Khóa dependency bằng lockfile khi chọn toolchain.
 
