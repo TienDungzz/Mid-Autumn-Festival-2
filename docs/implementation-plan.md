@@ -1,17 +1,32 @@
-# Kế hoạch triển khai Trung thu
+# Trạng thái triển khai và việc còn lại
 
-Đây là kế hoạch, chưa đánh dấu tính năng hoàn thành. Phạm vi theo [yêu cầu sản phẩm](product-requirements.md), hình ảnh theo [storyboard](scene-design.md).
+Cập nhật 09/11/2026. Phân biệt tính năng đã có với nghiệm thu phát hành; build/test qua không chứng minh đã đạt hiệu năng hoặc QA mọi thiết bị.
 
-| Mốc | Đầu ra | Điều kiện hoàn thành |
-| --- | --- | --- |
-| 1. Chốt hình ảnh/nền tảng | Phác sông, cầu, hai bờ phố; camera; rà soát asset và chọn công nghệ | Bố cục rõ trên desktop/mobile; biết asset cần dựng mới |
-| 2. Cảnh 1 | Sông giữa phố cổ Trung Hoa tấp nập hai bờ, đôi nhân vật trên cầu | Đọc rõ bối cảnh và chủ thể, ánh sáng lễ hội |
-| 3. Thả đèn/chuyển cảnh | Cùng nâng/thả đèn; camera lùi và hướng lên | Tay/đèn đồng bộ, cảnh 1 nhỏ dần liên tục |
-| 4. Cảnh 2/lời chúc | Nhiều đèn bay, danh sách lời chúc, random và hộp thoại | Mỗi lượt chọn random một lần; đóng/chọn lại được, cho phép trùng |
-| 5. Hoàn thiện | Responsive, bàn phím, giảm chuyển động, tải lỗi, reset, tối ưu | Đạt [kiểm thử](testing-strategy.md), không tích lũy tài nguyên khi xem lại |
+## Đã triển khai
 
-Kiểm chứng sớm động tác thả đèn và camera trên mobile. Chốt mật độ phố/đám đông/đèn sau đo bản dựng. Không triển khai luồng photobooth từ tài liệu cũ trong các mốc này.
+| Phần       | Trạng thái code                                                                               |
+| ---------- | --------------------------------------------------------------------------------------------- |
+| Nền tảng   | TypeScript strict, Vite, Three.js, UI DOM/CSS                                                 |
+| Home       | Hai cánh mở, tải cảnh, thử lại, CTA, focus/inert                                              |
+| Cảnh 1     | Phố cổ hai bờ, sông, cầu, đôi nhân vật đối mặt, thuyền, đám đông, đèn trang trí               |
+| Hoạt cảnh  | Cùng nâng/thả đèn, IK sau mixer, camera lùi và hướng lên                                      |
+| Cảnh 2     | Đèn lớn bay, chọn lời chúc random, hộp thoại, tiếp tục bay khi đóng                           |
+| Trang trí  | Trăng có mảng tối, sao nền, logo thỏ/trăng, đèn ông sao; đã bỏ hình sao nhân vật              |
+| Điều khiển | Custom VI/EN dropdown, âm thanh tổng hợp mặc định tắt, quay lại, reduced motion theo thiết bị |
+| Công cụ    | ESLint, Stylelint, Prettier, EditorConfig, typecheck, 10 unit test và build                   |
+| Nguồn 3D   | Hai master đã đổi tên; script xuất GLB runtime và Blender trung gian vào .qa                  |
 
-## Quy trình tài nguyên Blender MCP
+## Ưu tiên tiếp theo
 
-Ở mốc 1 kiểm kết nối/scene và lập danh sách model; mốc 2 dựng cầu, phố, đèn và rà soát nhân vật; mốc 3 tạo/kiểm animation nâng-thả đèn. Mỗi lần xuất đi qua .qa rồi kiểm loader web trước khi đưa vào public. Theo [Blender MCP](blender-workflow.md), [cấu trúc thư mục](folder-structure.md) và [quality checks](quality-checks.md). Chưa coi kết nối MCP, model hoặc script là đã được kiểm chứng chỉ vì có trong kế hoạch.
+1. Sửa và kiểm chứng camera khi resize/xoay màn hình trong sky/transition; xử lý pagehide/pageshow với bfcache.
+2. Làm rõ vòng đời cache glow texture, kiểm retry/reset/cleanup bằng integration test.
+3. Đo tải, frame time, draw calls và bộ nhớ trên mobile/desktop tham chiếu; tối ưu GLB và bundle theo kết quả đo.
+4. QA bàn phím, screen reader, zoom 200%, Safari/iOS, Android, tab ẩn, tải lỗi/retry và rig cận cảnh.
+5. Tách UI feature, tập trung config/nhãn, giảm selector ID; bổ sung manifest/license asset và CI.
+6. Xử lý cảnh báo dependency, chọn hosting rồi kiểm artifact và toàn hành trình sau deploy.
+
+## Quy trình Blender
+
+Script hiện tại đọc art/characters/mid-autumn-male-source.blend và mid-autumn-female-source.blend. GLB xuất trực tiếp vào public/models/characters; Blender trung gian vào .qa/characters. Chưa chạy lại script sau khi đổi tên/đổi thư mục output. Quy trình mục tiêu là kiểm staging trước khi thay runtime; cần sửa script nếu muốn bắt buộc cổng này tự động. Không mặc định coi source hoặc animation đạt QA chỉ vì export thành công.
+
+Kết quả thực chạy tại verification-report.md; tiêu chí nghiệm thu tại testing-strategy.md và quality-checks.md.
