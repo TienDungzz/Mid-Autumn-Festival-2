@@ -27,6 +27,6 @@ Cập nhật 09/11/2026. Phân biệt tính năng đã có với nghiệm thu ph
 
 ## Quy trình Blender
 
-Script hiện tại đọc art/characters/mid-autumn-male-source.blend và mid-autumn-female-source.blend. GLB xuất trực tiếp vào public/models/characters; Blender trung gian vào .qa/characters. Chưa chạy lại script sau khi đổi tên/đổi thư mục output. Quy trình mục tiêu là kiểm staging trước khi thay runtime; cần sửa script nếu muốn bắt buộc cổng này tự động. Không mặc định coi source hoặc animation đạt QA chỉ vì export thành công.
+Script hiện tại đọc hai master sạch art/characters/mid-autumn-male-source.blend và mid-autumn-female-source.blend. Đã mở lại và xuất thử master sạch, đối chiếu dữ liệu GLB với runtime. Mặc định GLB xuất public/models/characters; có thể truyền EXPORT_ROOT để xuất thử vào .qa. Blender trung gian nằm trong .qa/characters. Quy trình mục tiêu vẫn cần cổng QA bắt buộc trước khi thay runtime; không mặc định coi hình ảnh/animation đạt QA chỉ vì dữ liệu export khớp.
 
 Kết quả thực chạy tại verification-report.md; tiêu chí nghiệm thu tại testing-strategy.md và quality-checks.md.

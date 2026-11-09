@@ -4,7 +4,7 @@
 
 Dự án có thể dùng kết nối Blender MCP để kiểm tra scene, chạy Python bpy, dựng/chỉnh mô hình, tạo vật liệu, rig/animation và xuất GLB. MCP là công cụ trong quá trình sản xuất tài nguyên, không phải dependency của website khi chạy trên máy người xem.
 
-Repository đã có script scripts/blender/prepare_characters.py và hai GLB nhân vật runtime. Script đọc art/characters/mid-autumn-male-source.blend và mid-autumn-female-source.blend; ghi GLB trực tiếp vào public/models/characters và Blender trung gian vào .qa/characters. Chưa chạy lại script sau khi đổi tên nguồn/đường dẫn staging. Khả năng kết nối MCP phải kiểm tra ở mỗi phiên; không suy ra trạng thái live Blender từ tài liệu.
+Repository đã có script scripts/blender/prepare_characters.py và hai GLB nhân vật runtime. Script đọc hai master sạch art/characters/mid-autumn-male-source.blend và mid-autumn-female-source.blend. Đã chạy mở lại và xuất thử master sạch bằng Blender 4.5.15 LTS, đối chiếu dữ liệu GLB trong .qa; không thay public. Mặc định script ghi GLB vào public/models/characters, hỗ trợ EXPORT_ROOT để đổi đích xuất thử; Blender trung gian vào .qa/characters. Khả năng kết nối MCP phải kiểm tra ở mỗi phiên; không suy ra trạng thái live Blender từ tài liệu.
 
 ## 2. Bắt đầu phiên dựng
 
