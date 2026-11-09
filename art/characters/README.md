@@ -1,21 +1,26 @@
 # Nguồn nhân vật Trung thu
 
-## File được giữ
+## Master hiện hành
 
-- mid-autumn-male-source.blend và mid-autumn-female-source.blend là đầu vào của scripts/blender/prepare_characters.py, không phải asset runtime dư thừa. Hậu tố source phân biệt master đầu vào với bản đã chỉnh trang phục/animation trong .qa và GLB runtime trong public.
-- textures/ chứa atlas tóc của nguồn Blender. Giữ cùng nguồn để chỉnh sửa/tái xuất; chưa xác minh toàn bộ texture đã được pack trong master.
-- Không có các script build_male.py, pack-male.mjs hoặc finalize-female.mjs của dự án cũ; các hướng dẫn đó đã được bỏ.
+- mid-autumn-male-source.blend: master nam sạch, khoảng 6,65 MB; 18 object, 16 mesh, một rig và một scene.
+- mid-autumn-female-source.blend: master nữ sạch, khoảng 7,19 MB; 19 object, 17 mesh, một rig và một scene.
+- Hai file không chứa hoạt ảnh cũ. Pipeline tạo clip thả đèn mới khi xuất.
+- Texture phụ thuộc đã được pack vào master; textures/ giữ atlas để biên tập. Một số metadata đường dẫn ảnh cũ còn tồn tại; exporter dùng dữ liệu packed khi không tìm thấy file ngoài.
 
-## Tạo lại nhân vật
+## Xuất nhân vật
 
-Chạy scripts/blender/prepare_characters.py trong Blender với __file__ hợp lệ, hoặc cung cấp PROJECT_ROOT là thư mục dự án. Script đọc hai master, sửa trang phục/clip và xuất:
+Chạy scripts/blender/prepare_characters.py trong Blender với __file__ hợp lệ, hoặc cung cấp PROJECT_ROOT là thư mục dự án. Script đọc hai master, chỉnh trang phục/clip và xuất:
 
 - public/models/characters/festival-male.glb
 - public/models/characters/festival-female.glb
-- .qa/characters/festival-male.blend và festival-female.blend: bản trung gian, được gitignore, có thể tái tạo.
+- .qa/characters/festival-male.blend và festival-female.blend: đầu ra trung gian, được gitignore, có thể tạo lại.
 
-Không chạy script trên scene biên tập chưa lưu. Giữ nguyên master; kiểm rig, trang phục và clip trên runtime sau mỗi lần xuất. Website dùng GLB, không dùng trực tiếp .blend hoặc PNG trong art.
+Có thể truyền EXPORT_ROOT qua runpy để xuất GLB thử vào .qa thay vì ghi public. Không chạy script trên scene biên tập chưa lưu. Website dùng GLB, không tải .blend hay ảnh trong art.
+
+## Kiểm chứng
+
+Ngày 09/11/2026 đã mở lại hai master sạch và xuất thử bằng Blender 4.5.15 LTS. Dữ liệu geometry/animation accessor, ảnh nhúng, số khớp skin và kích thước GLB khớp runtime hiện hành; không thay GLB public. Chưa QA trực quan mọi khung hình trong lần dọn nguồn.
 
 ## Nguồn và quyền sử dụng
 
-Ghi chú kế thừa ghi nền nhân vật/rig Sam CC0. Chưa có hồ sơ nguồn/license độc lập được xác minh trong repository; cần bổ sung trước phát hành, không coi ghi chú này là chứng nhận quyền sử dụng đầy đủ.
+Ghi chú kế thừa ghi nền nhân vật/rig Sam CC0. Hồ sơ nguồn/license độc lập chưa được xác minh đầy đủ; cần hoàn thiện trước phát hành.
