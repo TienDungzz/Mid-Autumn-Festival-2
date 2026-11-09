@@ -35,17 +35,19 @@ Mở **http://127.0.0.1:5177/**. Dev server dùng strictPort; nếu cổng bận
 
 ### Kiểm tra và build
 
-| Lệnh                                    | Mục đích                                                 |
-| --------------------------------------- | -------------------------------------------------------- |
-| npm run check                           | Typecheck → ESLint → Stylelint → Prettier → test → build |
-| npm run typecheck                       | Kiểm tra TypeScript                                      |
-| npm run lint / npm run lint:css         | Kiểm tra TS/JS và CSS                                    |
-| npm run format:check                    | Kiểm tra định dạng                                       |
-| npm test                                | Chạy unit test                                           |
-| npm run build                           | Tạo bản production trong dist/                           |
-| npm run preview                         | Xem bản build local, không phải server production        |
-| npm run lint:fix / npm run lint:css:fix | Sửa lỗi lint có thể tự động sửa                          |
-| npm run format                          | Định dạng mã và docs trong phạm vi cấu hình              |
+File điều phối là [scripts/check-code.mjs](scripts/check-code.mjs). Chạy `npm run check` hoặc `node scripts/check-code.mjs`; script dùng dependency local, không gọi shell và trả mã lỗi ngay khi một bước thất bại. Phạm vi ESLint bao gồm cả scripts/**/*.mjs. Script không kiểm Python/Blender hoặc thay thế QA trên trình duyệt.
+
+| Lệnh                                    | Mục đích                                                            |
+| --------------------------------------- | ------------------------------------------------------------------- |
+| npm run check                           | Typecheck → lint/BEM → format → test → build → performance/security |
+| npm run typecheck                       | Kiểm tra TypeScript                                                 |
+| npm run lint / npm run lint:css         | Kiểm tra TS/JS và CSS                                               |
+| npm run format:check                    | Kiểm tra định dạng                                                  |
+| npm test                                | Chạy unit test                                                      |
+| npm run build                           | Tạo bản production trong dist/                                      |
+| npm run preview                         | Xem bản build local, không phải server production                   |
+| npm run lint:fix / npm run lint:css:fix | Sửa lỗi lint có thể tự động sửa                                     |
+| npm run format                          | Định dạng mã và docs trong phạm vi cấu hình                         |
 
 ### Cấu trúc và tài nguyên
 
@@ -58,7 +60,7 @@ art/       Master Blender, texture và logo nguồn
 docs/      Đặc tả, tiêu chuẩn và báo cáo kiểm chứng
 ```
 
-Hai master là art/characters/mid-autumn-male-source.blend và mid-autumn-female-source.blend. Script scripts/blender/prepare_characters.py xuất GLB vào public/models/characters và bản Blender trung gian vào .qa/characters. Nguồn Blender cần để biên tập/tái tạo, không phải tài nguyên trình duyệt tải. Chưa chạy lại export sau lần đổi tên/đổi thư mục staging; xem [README nhân vật](art/characters/README.md).
+Hai master sạch là art/characters/mid-autumn-male-source.blend và mid-autumn-female-source.blend. Script scripts/blender/prepare_characters.py xuất GLB vào public/models/characters và bản Blender trung gian vào .qa/characters. Đã mở lại và xuất thử master sạch trong Blender, đối chiếu dữ liệu GLB với runtime; không thay GLB đang dùng. Xem [README nhân vật](art/characters/README.md).
 
 Chỉ deploy nội dung **dist/**. Không upload art, scripts, .qa, cache hoặc node_modules. Asset hiện dùng URL từ gốc domain; deploy dưới subpath cần điều chỉnh đường dẫn. Chưa có giấy phép chung được công bố cho toàn dự án; hồ sơ nguồn/license asset cần hoàn thiện trước phát hành.
 
@@ -100,17 +102,19 @@ Open **http://127.0.0.1:5177/**. The dev server uses strictPort and fails if the
 
 ### Checks and build
 
-| Command                                 | Purpose                                                     |
-| --------------------------------------- | ----------------------------------------------------------- |
-| npm run check                           | Typecheck → ESLint → Stylelint → Prettier → tests → build   |
-| npm run typecheck                       | Check TypeScript                                            |
-| npm run lint / npm run lint:css         | Lint TS/JS and CSS                                          |
-| npm run format:check                    | Check formatting                                            |
-| npm test                                | Run unit tests                                              |
-| npm run build                           | Produce the production build in dist/                       |
-| npm run preview                         | Preview the build locally; not a production server          |
-| npm run lint:fix / npm run lint:css:fix | Apply available lint fixes                                  |
-| npm run format                          | Format source and documentation within the configured scope |
+The entry point is [scripts/check-code.mjs](scripts/check-code.mjs). Run `npm run check` or `node scripts/check-code.mjs`. It uses local dependencies without a shell and stops with a nonzero exit code if a step fails. ESLint also checks scripts/**/*.mjs. This does not validate Python/Blender or replace browser QA.
+
+| Command                                 | Purpose                                                              |
+| --------------------------------------- | -------------------------------------------------------------------- |
+| npm run check                           | Typecheck → lint/BEM → format → tests → build → performance/security |
+| npm run typecheck                       | Check TypeScript                                                     |
+| npm run lint / npm run lint:css         | Lint TS/JS and CSS                                                   |
+| npm run format:check                    | Check formatting                                                     |
+| npm test                                | Run unit tests                                                       |
+| npm run build                           | Produce the production build in dist/                                |
+| npm run preview                         | Preview the build locally; not a production server                   |
+| npm run lint:fix / npm run lint:css:fix | Apply available lint fixes                                           |
+| npm run format                          | Format source and documentation within the configured scope          |
 
 ### Structure and assets
 
@@ -123,7 +127,7 @@ art/       Blender masters, source textures and logo
 docs/      Specifications, standards and verification reports
 ```
 
-Character masters are art/characters/mid-autumn-male-source.blend and mid-autumn-female-source.blend. scripts/blender/prepare_characters.py exports runtime GLB files to public/models/characters and intermediate Blender files to .qa/characters. Source assets support editing and regeneration; browsers do not download them. Export has not been rerun since the source renaming and staging-path changes; see the [character README](art/characters/README.md).
+Clean character masters are art/characters/mid-autumn-male-source.blend and mid-autumn-female-source.blend. scripts/blender/prepare_characters.py exports runtime GLB files to public/models/characters and intermediate Blender files to .qa/characters. The clean masters have been reopened and test-exported in Blender, with GLB data compared against the existing runtime assets. Runtime GLB files remain unchanged. See the [character README](art/characters/README.md).
 
 Deploy only the contents of **dist/**. Keep art, scripts, .qa, caches and node_modules out of the deployment. Asset URLs currently assume the domain root; subpath hosting requires path changes. No project-wide license has been published; asset provenance and licensing records must be completed before release.
 
@@ -135,3 +139,7 @@ This README is the starting point; [docs/README.md](docs/README.md) indexes the 
 - [Technical design](docs/technical-design.md) · [Repository structure](docs/folder-structure.md)
 - [Code standards](docs/coding-standards.md) · [Security](docs/security-standards.md) · [Performance](docs/performance-standards.md)
 - [Blender workflow](docs/blender-workflow.md) · [Build/deployment](docs/deployment-guide.md) · [Remaining work](docs/implementation-plan.md)
+
+### Additional checks / Kiểm tra bổ sung
+
+See [automated checks / phạm vi kiểm tra tự động](docs/automated-checks.md). Commands: npm run check:bem, npm run check:performance, npm run check:security, npm run audit:security. Performance/security checks need a fresh build; the online dependency audit runs separately. / Hai lệnh performance và security cần build mới; audit dependency online chạy riêng.

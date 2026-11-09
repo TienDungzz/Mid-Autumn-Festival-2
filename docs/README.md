@@ -18,6 +18,7 @@ Hai cảnh: đôi nhân vật thả lồng đèn trên cầu giữa phố cổ T
 - [Tiêu chuẩn hiệu năng](performance-standards.md)
 - [Tiêu chuẩn bảo mật và tài nguyên](security-standards.md)
 - [Cổng kiểm tra chất lượng](quality-checks.md)
+- [Phạm vi BEM, performance và security checker](automated-checks.md)
 - [Kế hoạch triển khai](implementation-plan.md)
 - [Chiến lược kiểm thử](testing-strategy.md)
 

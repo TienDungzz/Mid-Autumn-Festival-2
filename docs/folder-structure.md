@@ -20,8 +20,9 @@ src/
   shared/styles/main.css          # CSS và token dùng chung
 tests/                            # Sáu file unit test, 10 test case
 scripts/blender/prepare_characters.py
+scripts/check-code.mjs             # Điều phối type/lint/format/test/build
 art/
-  characters/                     # mid-autumn-{male,female}-source.blend, textures, README
+  characters/                     # Master sạch *-source.blend, textures và README
   branding/                       # Logo master và ghi chú nguồn
 public/
   models/characters/              # festival-male.glb, festival-female.glb
