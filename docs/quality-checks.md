@@ -16,8 +16,10 @@ Workspace đã có ứng dụng TypeScript/Vite/Three.js và bộ kiểm tra ESL
 | Engine           | Cleanup, dùng chung tài nguyên, vòng lặp render, số đèn ổn định sau reset         |
 | Phát hành        | Build/typecheck/lint, hành trình hai cảnh, tải lỗi, đo mobile, artifact/cache     |
 
-## 3. Công cụ dự kiến
+## 3. Công cụ hiện hành
 
-Khi có toolchain, khai báo build, typecheck, lint, lint:css, format:check và test với cấu hình thống nhất local/CI. Thêm kiểm manifest, tham chiếu asset và kích thước bundle khi có dữ liệu thực. Không coi phân tích tên file là đủ để xác định asset thừa vì asset có thể được tải qua manifest.
+Entry point scripts/check-code.mjs chạy typecheck, lint, BEM HTML/CSS, format, test, build, performance budget và security tĩnh. Dừng ở lỗi đầu tiên, không dùng shell. Phạm vi và ngoại lệ tại [automated-checks.md](automated-checks.md). Python Blender và CI chưa được kiểm bởi script này.
+
+Các lệnh riêng check:bem, check:performance và check:security đã có trong package.json. Hai lệnh sau cần build mới nhất; audit:security online chạy riêng. Chưa có kiểm manifest hoặc xác định đầy đủ asset thừa.
 
 Báo cáo ghi thiết bị, cấu hình render, kết quả và phần chưa kiểm tra. Không ghi “đạt” cho bước chưa chạy hoặc dùng preview Blender thay kiểm runtime. Không thêm test lặp lại implementation cho chỉnh sửa docs đơn giản.

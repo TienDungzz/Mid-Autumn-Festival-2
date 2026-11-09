@@ -4,19 +4,21 @@ Cập nhật 09/11/2026. Báo cáo này thay phần nhật ký chồng chéo tr�
 
 **Kết luận:** bộ kiểm tra tự động hiện có đã qua ở lần chạy gần nhất; chưa đủ bằng chứng nghiệm thu phát hành.
 
+Entry point scripts/check-code.mjs đã tích hợp BEM HTML/CSS, performance budget và security tĩnh. Có 7 test checker mới, tổng 17 test. Đã chuyển selector ID CSS sang class và bỏ button--small không dùng. Phạm vi/giới hạn tại automated-checks.md; chưa QA lại giao diện.
+
 ## Bằng chứng đã có
 
 | Kiểm tra                  | Kết quả và phạm vi                                                                                                                         |
 | ------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------ |
 | npm.cmd run check         | Lần chạy 09/11 qua typecheck, ESLint 10, Stylelint 16, Prettier 3, test và build                                                           |
-| Unit test                 | 10/10: IK, release timeline, flight/pause/wrap, random, state, lighting, dịch và quay lại                                                  |
+| Unit test                 | 17/17: 7 test checker và 10 test IK, release timeline, flight/pause/wrap, random, state, lighting, dịch và quay lại                        |
 | Production build          | JS 671.42 kB, gzip 178.79 kB; còn cảnh báo chunk trên 500 kB                                                                               |
 | Runtime asset             | Hai GLB tổng 15.741.392 bytes trước nén truyền tải                                                                                         |
 | Chrome thủ công trước đây | Đã quan sát home → cầu → thả → bầu trời → mở/đóng lời chúc; hai CTA và đèn tiếp tục bay sau đóng                                           |
 | Mobile/trăng              | Đã kiểm toán học mép trăng ở một số viewport; chưa phải QA điện thoại thật. Vị trí desktop đã chỉnh tiếp để tránh chữ, chưa QA lại toàn bộ |
 | npm audit                 | Lần chạy 09/11: 10 moderate trong dependency dev, không high/critical; chưa xử lý bằng downgrade/override                                  |
 
-Tên mới của Blender nguồn và đường dẫn staging đã cập nhật trong script nhưng chưa chạy lại export Blender. Kết quả build/test web không chứng minh script bpy đúng trên Blender thực tế.
+Ngày 09/11 đã tạo và mở lại master sạch bằng Blender 4.5.15 LTS; xuất GLB thử qua prepare_characters.py vào .qa. Geometry/animation accessor, ảnh nhúng và số khớp skin khớp GLB runtime, dung lượng xuất bằng nhau. Master nam khoảng 6,65 MB, nữ 7,19 MB; mỗi file một scene/rig, không còn action cũ. Không thay GLB public. Có cảnh báo metadata đường dẫn ảnh cũ không tồn tại nhưng exporter dùng ảnh packed; chưa QA trực quan mọi khung hình.
 
 ## Đối chiếu tiêu chuẩn
 
@@ -24,7 +26,7 @@ Tên mới của Blender nguồn và đường dẫn staging đã cập nhật t
 - Có state machine, random thuần, nội dung lời chúc bằng textContent; engine không import UI/app.
 - Có render delta giới hạn, pause tab ẩn, mixer trước IK, reset và dispose tài nguyên/listener.
 - Có dialog native, focus-visible, inert, menu bàn phím và prefers-reduced-motion; chưa nghiệm thu đầy đủ truy cập.
-- Chưa đạt toàn bộ cấu trúc/BEM: main.ts còn gộp template/điều phối, CSS chung và selector ID, config/nhãn còn rải. Stylelint hiện cho phép ID hiện hữu; lint qua không đồng nghĩa mọi quy tắc kiến trúc đã đạt.
+- Chưa đạt toàn bộ cấu trúc/BEM: main.ts còn gộp template/điều phối, CSS chung, config/nhãn còn rải. Selector ID đã bỏ, Stylelint cấm ID; checker qua chưa có nghĩa mọi quy tắc kiến trúc đã đạt.
 - Chưa có CI, integration/e2e, assets manifest hoặc hồ sơ license hoàn chỉnh. Chưa đo mobile/Safari, FPS, frame time, bộ nhớ, draw calls hay thời gian tải.
 - Python Blender chưa được ESLint/Stylelint/Prettier kiểm tra. art và public nằm ngoài phạm vi Prettier.
 
