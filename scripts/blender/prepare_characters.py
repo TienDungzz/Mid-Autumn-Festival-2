@@ -10,7 +10,7 @@ from pathlib import Path
 from mathutils import Vector
 
 ROOT = Path(globals().get('PROJECT_ROOT', Path(__file__).resolve().parents[2]))
-OUT = ROOT / 'public/models/characters'
+OUT = Path(globals().get('EXPORT_ROOT', ROOT / 'public/models/characters'))
 OUT.mkdir(parents=True, exist_ok=True)
 SOURCE = ROOT / 'art/characters'
 STAGING = ROOT / '.qa/characters'
