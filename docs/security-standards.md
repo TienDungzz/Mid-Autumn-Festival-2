@@ -2,6 +2,8 @@
 
 ## 1. Phạm vi
 
+Đã có check:security kiểm tĩnh HTML/code và artifact, cùng audit:security online riêng. Xem [phạm vi checker](automated-checks.md); không xem checker qua là bảo đảm không còn lỗ hổng.
+
 Trải nghiệm dùng tài nguyên và lời chúc có sẵn; không cần tài khoản, quyền camera/microphone hoặc upload ảnh. Blender MCP dùng lúc sản xuất, không được đóng gói endpoint, API key hay quyền điều khiển Blender vào website.
 
 ## 2. Nội dung và nguồn ngoài
