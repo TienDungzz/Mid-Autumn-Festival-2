@@ -7,15 +7,19 @@
     "dev": "vite --host 127.0.0.1 --port 5177 --strictPort",
     "build": "tsc --noEmit && vite build",
     "typecheck": "tsc --noEmit",
-    "test": "node --experimental-strip-types --test tests/*.test.ts",
+    "test": "node --experimental-strip-types --test tests/*.test.ts tests/*.test.mjs",
     "preview": "vite preview --host 127.0.0.1",
-    "lint": "eslint src tests *.js --max-warnings 0",
+    "lint": "eslint src tests \"scripts/**/*.mjs\" *.js --max-warnings 0",
     "lint:fix": "npm run lint -- --fix",
     "lint:css": "stylelint \"src/**/*.css\" --max-warnings 0",
     "lint:css:fix": "npm run lint:css -- --fix",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
-    "check": "npm run typecheck && npm run lint && npm run lint:css && npm run format:check && npm test && npm run build"
+    "check": "node scripts/check-code.mjs",
+    "check:bem": "node scripts/check-bem.mjs",
+    "check:performance": "node scripts/check-performance.mjs",
+    "check:security": "node scripts/check-security.mjs",
+    "audit:security": "npm audit --audit-level=high"
   },
   "dependencies": {
     "three": "^0.180.0"
@@ -25,6 +29,9 @@
     "@types/three": "^0.180.0",
     "eslint": "^10.14.0",
     "globals": "^16.5.0",
+    "parse5": "^7.3.0",
+    "postcss": "^8.5.32",
+    "postcss-selector-parser": "^7.1.8",
     "prettier": "^3.9.10",
     "stylelint": "^16.26.1",
     "stylelint-config-standard": "^38.0.0",
