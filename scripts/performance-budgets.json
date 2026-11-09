@@ -1,0 +1,6 @@
+{
+  "note": "Temporary regression caps based on the current build, not release performance targets.",
+  "perFileBytes": { "js": 716800, "css": 51200, "glb": 8388608, "png": 262144, "svg": 32768 },
+  "jsGzipBytes": 204800,
+  "totalBytes": 18874368
+}
