@@ -51,7 +51,7 @@ app.innerHTML = `
         <svg class="action-button__arrow" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M5 15 15 5M5 5h10v10"/></svg>
       </button>
       <p class="home__status" id="load-status" role="status">Đang chuẩn bị đêm trăng…</p>
-      <button class="text-button" id="retry" hidden>Thử lại</button>
+      <button class="text-button home__retry" id="retry" hidden>Thử lại</button>
     </div>
     <footer class="home__footer"><span>GỬI LÊN TRỜI MỘT LỜI THƯƠNG</span><span>RẰM THÁNG TÁM <i>✧</i> MÙA ĐOÀN VIÊN</span></footer>
   </section>
@@ -72,10 +72,10 @@ app.innerHTML = `
         </button>
       </div>
     </div>
-    <button class="top-controls__button" id="sound" type="button" aria-label="Bật âm thanh" aria-pressed="false">
-      <span id="sound-icon" aria-hidden="true">♪</span><span class="top-controls__label" id="sound-label">Bật âm thanh</span>
+    <button class="top-controls__button top-controls__button--sound" id="sound" type="button" aria-label="Bật âm thanh" aria-pressed="false">
+      <span class="top-controls__sound-icon" id="sound-icon" aria-hidden="true">♪</span><span class="top-controls__label" id="sound-label">Bật âm thanh</span>
     </button>
-    <button class="top-controls__button" id="replay" type="button" aria-label="Quay lại" hidden>
+    <button class="top-controls__button top-controls__button--back" id="replay" type="button" aria-label="Quay lại" hidden>
       <span class="top-controls__icon" aria-hidden="true">↶</span><span class="top-controls__label">Quay lại</span>
     </button>
   </nav>
@@ -84,7 +84,7 @@ app.innerHTML = `
     <div class="wish-dialog__moon">${moonIcon}</div>
     <span class="eyebrow">MỘT CHIẾC ĐÈN ĐÃ TÌM THẤY BẠN</span>
     <h2 id="wish-title">Lời chúc đêm trăng</h2>
-    <p id="wish-text"></p>
+    <p class="wish-dialog__message" id="wish-text"></p>
     <div class="wish-dialog__divider" aria-hidden="true">─── ✧ ───</div>
     <p class="wish-dialog__note">Gói chút bình yên, gửi đến riêng bạn.</p>
     <button class="button action-button action-button--sky" id="continue">

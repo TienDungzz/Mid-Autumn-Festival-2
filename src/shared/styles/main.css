@@ -20,7 +20,7 @@
 
 html,
 body,
-#app {
+.app {
   width: 100%;
   height: 100%;
   margin: 0;
@@ -636,7 +636,7 @@ h1 em {
   margin: 12px 0 24px;
 }
 
-#wish-text {
+.wish-dialog__message {
   font: 400 23px/1.6 var(--font-display);
   margin: 0;
 }
@@ -651,21 +651,6 @@ h1 em {
 .wish-dialog__note {
   font-size: 10px;
   color: #7e8272;
-}
-
-.button--small {
-  font-size: 10px;
-  padding: 12px 18px;
-  margin-top: 14px;
-  min-height: 44px;
-  gap: 16px;
-  background: #243d40;
-  color: #eee0c3;
-  border-color: #243d40;
-}
-
-.button--small:hover:not(:disabled) {
-  background: #345456;
 }
 
 .announcement {
@@ -825,7 +810,7 @@ h1 em {
     padding: 45px 25px 27px;
   }
 
-  #wish-text {
+  .wish-dialog__message {
     font-size: 21px;
   }
 }
@@ -925,15 +910,15 @@ h1 em {
   white-space: nowrap;
 }
 
-#sound {
+.top-controls__button--sound {
   width: 156px;
 }
 
-#replay {
+.top-controls__button--back {
   width: 112px;
 }
 
-#sound-icon,
+.top-controls__sound-icon,
 .top-controls__icon {
   font-size: 19px;
   line-height: 1;
@@ -1020,22 +1005,8 @@ h1 em {
 }
 
 /* Reserve space for both languages instead of allowing labels to resize their buttons. */
-#enter {
-  width: 270px;
-  max-width: 100%;
-}
 
-#release {
-  width: 248px;
-  max-width: 100%;
-}
-
-#continue {
-  width: 254px;
-  max-width: 100%;
-}
-
-#retry {
+.home__retry {
   width: 112px;
 }
 
@@ -1092,6 +1063,8 @@ h1 em {
 }
 
 .action-button--entry {
+  width: 270px;
+  max-width: 100%;
   background: linear-gradient(135deg, #f0d6a1, #cc9d5c);
   border-color: #f3d7a2;
   color: #302b23;
@@ -1114,6 +1087,8 @@ h1 em {
 }
 
 .action-button--release {
+  width: 248px;
+  max-width: 100%;
   background: linear-gradient(135deg, #f0d6a1, #cc9d5c);
   border-color: #f3d7a2;
   color: #302b23;
@@ -1136,6 +1111,8 @@ h1 em {
 }
 
 .action-button--sky {
+  width: 254px;
+  max-width: 100%;
   margin-top: 24px;
   background: linear-gradient(135deg, #304e50, #19343b);
   border-color: #9e8962;
@@ -1167,8 +1144,8 @@ h1 em {
     gap: 5px;
   }
 
-  #sound,
-  #replay {
+  .top-controls__button--sound,
+  .top-controls__button--back {
     width: 44px;
     padding: 8px;
   }
