@@ -62,6 +62,6 @@ Theo chiều phụ thuộc tại folder-structure; không phụ thuộc vòng ho
 
 Đã có build, typecheck, lint (ESLint), lint:css (Stylelint), format:check (Prettier) và test. Chạy npm.cmd run check để thực hiện toàn bộ. Các lệnh lint:fix, lint:css:fix và format dùng để sửa tự động; kiểm tra diff sau khi chạy. Cấu hình .editorconfig thống nhất UTF-8, LF và thụt dòng. Python Blender chưa được bộ lint/formatter này kiểm tra.
 
-Stylelint kế thừa config-standard và kiểm tra tên class BEM. Selector ID hiện hữu được giữ như khoản nợ kỹ thuật, chưa áp cổng selector-max-id; không coi lint qua là đã hoàn tất việc chuyển sang class. Các override !important cho hidden/reduced motion vẫn cần theo dõi trong báo cáo. Chưa có CI tự động chạy các lệnh này.
+Stylelint kế thừa config-standard, kiểm tên class BEM và cấm selector ID. check:bem đối chiếu HTML tĩnh/CSS, modifier/base và khai báo class theo [phạm vi checker](automated-checks.md). ID HTML vẫn dùng cho ARIA/điều phối. Các override !important cho hidden/reduced motion vẫn cần theo dõi. Chưa có CI; không coi checker qua là đã đạt mọi quy tắc kiến trúc hoặc UI.
 
 Thay đổi hoàn thành khi đúng hành vi, kiểm tra phù hợp đã chạy, UI được xem ở kích thước liên quan và asset 3D được kiểm tra trong runtime. Test tập trung vào random, state transition, reset/cleanup và mốc animation; không viết test chỉ sao chép chi tiết triển khai. Xem [quality checks](quality-checks.md).
